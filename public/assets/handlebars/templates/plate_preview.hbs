@@ -1,0 +1,24 @@
+<div class="box-top">
+    <div class="imgbox" id="box-image">
+        {{#if image}}
+            <img src="{{image}}" />
+        {{/if}}
+    </div>
+    <p>
+        <b class="text-natura" id="box-sku">{{sku}}</b>
+        <br/>
+        <strong id="box-title">{{title}}</strong> <br/>
+        <span id="box-description">{{description}}</span>
+    </p>
+</div>
+<div class="box-middle">
+    <div class="box-fecha">
+        <p>Fecha creacion: <span>0000-00-00</span> </p>
+        <p> <span>00:00:00</span> </p>
+    </div>
+</div>
+<div class="box-bottom">
+    <a href="#" id="box-link-download"><img src="{{icon_download}}" alt="download" />Descargar</a>
+    <a href="#" id="box-link-share"><img src="{{icon_share}}" alt="share" />Compartir</a>
+    <a href="#" id="box-link-view"><img src="{{icon_show}}" alt="view" />Ver</a>
+</div>

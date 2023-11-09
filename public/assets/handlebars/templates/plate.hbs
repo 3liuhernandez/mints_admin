@@ -1,0 +1,69 @@
+
+<!--
+    id
+    pathsrc
+    placeholder_img
+    new
+    title
+    sku
+    sku_array
+    description
+    fecha_creacion
+    hora_creacion
+    min_creacion
+    icon_download
+    icon_share
+    icon_show
+-->
+
+    <div class="row btns_actions w-100 py-2">
+        <span role="button" class="w-50 text-center h4">
+            <i class="bi bi-pencil-square" onclick="sidebar('show', {{id}})"></i>
+        </span>
+        <span role="button" class="w-50 text-center h4">
+            <i class="bi bi-trash-fill" onclick="delete_plate({{id}}, '{{pathsrc}}')"></i>
+        </span>
+    </div>
+
+    <div class="box-top">
+        <div class="imgbox {{new}}">
+            {{!-- <img src="{{pathsrc}}" alt="{{title}}" /> --}}
+            <img
+                class="lazy"
+                src="{{placeholder_img}}"
+                data-src="{{pathsrc}}"
+                data-srcset="{{pathsrc}} 2x, {{pathsrc}} 1x"
+                alt="{{title}}"
+            >
+        </div>
+        <p class="desc_{{id}} parrafo_desc" data-parrafo_id="{{id}}">
+            {{#if sku}}
+                <small class="ms-0 small" style="color: var(--bs-primary)" id="box-sku">
+                    SKU: <b>{{sku}}</b>
+                </small>
+                <br/>
+            {{/if}}
+            <strong>{{title}}</strong>
+            <br />
+            <span class="desc_content">{{description}}</span>
+        </p>
+    </div>
+
+    <div class="box-middle">
+        <div class="box-fecha">
+            <p>Fecha creacion: <span>{{fecha_creacion}}</span> </p>
+            <p> <span>{{hora_creacion}}:{{min_creacion}}</span> </p>
+        </div>
+    </div>
+
+    <div class="box-bottom">
+        <a href="javascript:void(0)" class="plate_action">
+            <img src="{{icon_download}}" alt="download" />Descargar
+        </a>
+        <a href="javascript:void(0)" class="plate_action">
+            <img src="{{icon_share}}" alt="share" />Compartir
+        </a>
+        <a href="javascript:void(0)" class="plate_action">
+            <img src="{{icon_show}}" alt="view" />Ver
+        </a>
+    </div>
