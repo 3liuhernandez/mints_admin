@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-<h1>home view</h1>
+
+<main id="home-section">
+    <h1>home view</h1>
+</main>
+
 @endsection

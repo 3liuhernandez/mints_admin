@@ -25,4 +25,5 @@ Route::post('ingreso', [LoginController::class, 'validate_login'])->name('login.
 
 Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeController::class,'home'])->name('home');
+    Route::get('logout', [LoginController::class,'logout'])->name('logout');
 });

@@ -13,28 +13,27 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         // TODO: login sso
-        $this->logout();
+        $this->user_logout();
+        section("Auth");
         return view("auth.login");
     }
 
     public function validate_login(Request $request) {
         $validator = Validator::make($request->all(), [
-            "email" => 'required|string|exists:users,email',
+            "email" => 'required|email|exists:users,email',
             "password" => 'required|string',
-        ],[
-            'required' => 'Todos los campos son obligatorios',
-            'string' => 'Debe ingresar solo texto'
         ]);
 
         if ($validator->fails()) {
-            return response($validator->errors(), 422);
+            return response(['validator' => $validator->errors()], 422);
         }
 
         $datos = $validator->validated();
-
-        $msg_login = 'Autenticación incorrecta';
         $email = $datos['email'];
         $password = $datos['password'];
+
+        $msg_login = 'Autenticación incorrecta';
+        $success = false;
 
         // try login
         $login = Auth::attempt([
@@ -43,17 +42,20 @@ class LoginController extends Controller
         ]);
 
         // login successfull
-        if ($login) return redirect()->route('home');
+        if ($login) $success = $msg_login = true;
 
         return response([
-            'success'=> false,
+            'success'=> $success,
             'message'=> $msg_login,
-        ], 422);
+        ], $success ? 200 : 422);
 
     }
 
-
     protected function logout() {
+        return redirect()->route('login');
+    }
+
+    protected function user_logout() {
         session()->flush();
         session()->regenerate();
         session()->save();
