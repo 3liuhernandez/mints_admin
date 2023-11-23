@@ -1,3 +1,9 @@
+
+@php
+    // handle url redirect after login success
+    $url_redirect = $redirect ? route($redirect) : route('home');
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mints Auth</title>
+    <title>{{ env('APP_NAME') }} - {{section()}}</title>
 
     {{-- BS --}}
     <link rel="stylesheet" href="{{ asset("bs/css/bootstrap.min.css") }}">
@@ -18,12 +24,11 @@
 <body>
 
     <main id="form-signin" class="w-100 m-auto">
-        <form action="{{ route('login.post') }}" onsubmit="return handle_submit()" method="post">
+        <form class="" action="{{ route('login.post') }}" data-redirect="{{ $url_redirect }}" onsubmit="return handle_submit()" method="post">
             @csrf
-            <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-    
-            <div class="form-floating mb-4">
+            <img class="mb-4 d-block mx-auto" src="{{asset('images/home/logo.jpg')}}" alt="" width="92" height="77">
+            <strong class="h3 mb-4 fw-normal">Please sign in</strong>
+            <div class="form-floating mt-2 mb-4">
                 <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com">
                 <label for="email">Email address</label>
             </div>
@@ -59,15 +64,23 @@
 
     const validate = (data) => {
 
+        blockui("");
+
         // clean error forms
         clean_error_forms();
 
-        axios.post("{{ route('login.post') }}", data)
+        const url_login_validate = $('form').attr('action');
+        const url_redirect = $('form').data('redirect');
+
+        axios.post(url_login_validate, data)
         .then( (response) => {
             const {status, data} = response;
-            if ( status == 200 && data.success ) return window.location = "{{route('home')}}";
+            if ( status == 200 && data.success ) return window.location = url_redirect;
         })
         .catch( ({response}) => {
+
+            blockui_stop();
+
             const {status, data} = response;
 
             // errores de validacion del formulario

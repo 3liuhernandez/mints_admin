@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +21,17 @@ Route::get('/', function () {
 });
 
 
-Route::get('ingreso', [LoginController::class, 'login'])->name('login');
+Route::get('ingreso{params?}', [PageController::class, 'login'])->name('login');
 Route::post('ingreso', [LoginController::class, 'validate_login'])->name('login.post');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('home', [HomeController::class,'home'])->name('home');
-    Route::get('logout', [LoginController::class,'logout'])->name('logout');
+
+    // load component
+    Route::get('project/load/component/{section}/{component}', [PageController::class, 'load_component'])->name('load_component');
+
+    Route::get('home', [PageController::class, 'home'])->name('home');
+    Route::get('logout', [PageController::class, 'logout'])->name('logout');
+
+    Route::get('memberships', [PageController::class, 'memberships'])->name('memberships.home');
+    Route::post('memberships/store', [MemberController::class, 'store'])->name('memberships.store');
 });

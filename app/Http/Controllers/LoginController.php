@@ -9,15 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
-    //
-
-    public function login(Request $request) {
-        // TODO: login sso
-        $this->user_logout();
-        section("Auth");
-        return view("auth.login");
-    }
-
     public function validate_login(Request $request) {
         $validator = Validator::make($request->all(), [
             "email" => 'required|email|exists:users,email',
@@ -51,11 +42,7 @@ class LoginController extends Controller
 
     }
 
-    protected function logout() {
-        return redirect()->route('login');
-    }
-
-    protected function user_logout() {
+    public function user_logout() {
         session()->flush();
         session()->regenerate();
         session()->save();

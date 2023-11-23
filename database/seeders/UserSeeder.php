@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
         $user->last_name = "Test";
         $user->email = "3liuhernandez@gmail.com";
         $user->password = bcrypt("mints");
-        $user->status = 1;
+        $user->role_id = 5; // developer
+        $user->status = 1; // activo
         $user->save();
     }
 }

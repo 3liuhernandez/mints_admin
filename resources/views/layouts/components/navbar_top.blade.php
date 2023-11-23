@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('home') }}">Mints</a>
+        <a class="navbar-brand" href="{{ route('home') }}">{{ env('APP_SHORT_NAME') }}</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,10 +13,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                    <a class="nav-link" href="{{ route('memberships.home') }}">Miembros</a>
                 </li>
             </ul>
 
