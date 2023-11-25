@@ -24,7 +24,7 @@
 <body>
 
     <main id="form-signin" class="w-100 m-auto">
-        <form class="" action="{{ route('login.post') }}" data-redirect="{{ $url_redirect }}" onsubmit="return handle_submit()" method="post">
+        <form action="{{ route('login.post') }}" data-redirect="{{ $url_redirect }}" onsubmit="return handle_submit()" method="post">
             @csrf
             <img class="mb-4 d-block mx-auto" src="{{asset('images/home/logo.jpg')}}" alt="" width="92" height="77">
             <strong class="h3 mb-4 fw-normal">Please sign in</strong>
@@ -53,6 +53,12 @@
 <script src="{{ asset("js/axios.min.js")}}"></script>
 <script src="{{ asset("js/jquery-3.6.0.min.js")}}"></script>
 <script src="{{ asset("js/sweetalert.min.js")}}"></script>
+
+{{-- BlockUI --}}
+<script src="{{ asset('jquery_blockui/jquery.blockUI.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('jquery_blockui/nprogress.css') }}">
+<script src="{{ asset('jquery_blockui/nprogress.min.js') }}"></script>
+
 <script src="{{ asset("js/app.js")}}"></script>
 
 <script>

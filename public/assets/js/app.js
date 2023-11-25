@@ -1,11 +1,3 @@
-
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
-
 $("#salir").on('click', function (e) {
     e.preventDefault();
     window.location = "logout";
