@@ -1,18 +1,20 @@
 @php
-    $faker = Faker\Factory::create('es_VE');
-    $members = [];
-    for ($i=0; $i < 50; $i++) {
+    $members = $data ?? [];
 
-        $members[] = (object) [
-            'id' => $i+1,
-            'name' => $faker->name(),
-            'last_name' => $faker->lastName(),
-            'dni' => $faker->nationalId(),
-            'email' => $faker->unique()->safeEmail(),
-            'phone' => $faker->unique()->phoneNumber(),
-            'f_bautizmo' => $faker->date($format = 'Y-m-d', $max = 'now'),
-            'status' => $faker->randomElement([1, 2, 3])
-        ];
+    if ( empty($members) ) {
+        $faker = Faker\Factory::create('es_VE');
+        for ($i=0; $i < 50; $i++) {
+            $members[] = (object) [
+                'id' => $i+1,
+                'name' => $faker->name(),
+                'last_name' => $faker->lastName(),
+                'dni' => $faker->nationalId(),
+                'email' => $faker->unique()->safeEmail(),
+                'phone' => $faker->unique()->phoneNumber(),
+                'f_bautizmo' => $faker->date($format = 'Y-m-d', $max = 'now'),
+                'status' => $faker->randomElement([1, 2, 3])
+            ];
+        }
     }
 @endphp
 
@@ -78,19 +80,13 @@
             buttons: [
                 {
                     extend: 'excelHtml5',
-                    title:'Natura Comunica - Reporte de Placas',
+                    title:'Report',
                     text:'Reporte Excel',
                     exportOptions: {
                         format: {
                             body: function (data, rowIdx, colIndex, cellNode) {
-                                if ( $(cellNode).hasClass('col-categories') ) {
-                                    return $(cellNode).text().toString()
-                                }
-
-                                if ( $(cellNode).hasClass('col-path_src') ) {
-                                    return $(cellNode).find('a').attr('href');
-                                }
-
+                                if ( $(cellNode).hasClass('col-categories') ) return $(cellNode).text().toString()
+                                if ( $(cellNode).hasClass('col-path_src') )   return $(cellNode).find('a').attr('href');
                                 return $(cellNode).text()
                             }
                         }
