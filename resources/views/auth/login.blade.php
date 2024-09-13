@@ -73,7 +73,7 @@
         blockui("");
 
         // clean error forms
-        clean_error_forms();
+        clear_error_forms($('form'));
 
         const url_login_validate = $('form').attr('action');
         const url_redirect = $('form').data('redirect');
@@ -98,29 +98,6 @@
             // error interno
             if ( status == 500 ) return swali("Ups", "estamos teniendo problemas internos, vuelve a intentar más tarde", "ok")
         })
-    };
-
-    const clean_error_forms = () => {
-        $('form input').each( (i, input) => {
-            $(input).removeClass('is-invalid is-valid');
-            $(input).parent().find(`.invalid-feedback`).remove();
-        })
-    };
-
-    const show_error_form = ( list_errors ) => {
-        for (const error_key in list_errors) {
-            if (Object.hasOwnProperty.call(list_errors, error_key)) {
-                const error_msg = list_errors[error_key];
-                const $error_input = $(`input#${error_key}`);
-                if ( $error_input.length ) $error_input.addClass('is-invalid').parent().append( template_tag_error(error_msg) );
-            }
-        }
-    };
-
-    const template_tag_error = (message) => {
-        return `<span class="invalid-feedback" role="alert">
-            <strong>${message}</strong>
-        </span>`
     };
 </script>
 

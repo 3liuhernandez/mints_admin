@@ -125,6 +125,30 @@ const fnLoadblockUI = function () {
     return false;
 };
 
+const template_tag_error_form = (message) => {
+    return `<span class="invalid-feedback" role="alert">
+        <strong>${message}</strong>
+    </span>`
+};
+
+const clear_error_forms = ( $form ) => {
+    $form.find('input, select, textarea').each( (i, input) => {
+        $(input).removeClass('is-invalid is-valid');
+        $(input).parent().find(`.invalid-feedback`).remove();
+    })
+};
+
+
+const show_error_form = ( list_errors ) => {
+    for (const error_key in list_errors) {
+        if (Object.hasOwnProperty.call(list_errors, error_key)) {
+            const error_msg = list_errors[error_key];
+            const $error_input = $(`input#${error_key}`);
+            if ( $error_input.length ) $error_input.addClass('is-invalid').parent().append( template_tag_error_form(error_msg) );
+        }
+    }
+};
+
 jQuery(() => {
     fnLoadblockUI();
 
