@@ -1,11 +1,58 @@
 
 @php
     $url_component_form_new_student = route("load_component", [section(), 'form_new_student']);
+
+    $heading = (object) [
+        [
+            'label' => 'ID',
+            'key' => 'id'
+        ],
+        [
+            'label' => 'DNI',
+            'key' => 'dni',
+        ],
+        [
+            'label' => 'NOMBRE',
+            'key' => 'name',
+        ],
+        [
+            'label' => 'APELLIDO',
+            'key' => 'last_name',
+        ],
+        [
+            'label' => 'TELEFONO',
+            'key' => 'phone',
+        ],
+        [
+            'label' => 'STATUS',
+            'key' => 'status',
+        ]
+    ];
+
+    $members = [];
+
+    if ( empty($members) ) {
+        $faker = Faker\Factory::create('es_VE');
+        for ($i=0; $i < 50; $i++) {
+            $members[] = collect([
+                'id' => $i+1,
+                'name' => $faker->name(),
+                'last_name' => $faker->lastName(),
+                'dni' => $faker->nationalId(),
+                'email' => $faker->unique()->safeEmail(),
+                'phone' => $faker->unique()->phoneNumber(),
+                'f_bautizmo' => $faker->date($format = 'Y-m-d', $max = 'now'),
+                'status' => $faker->randomElement([1, 2, 3])
+            ]);
+        }
+    }
+    $members = collect($members);
 @endphp
 
 @extends('layouts.master')
 
 @section('foot')
+
     {{-- DATA TABLES --}}
     <link rel="stylesheet" href="{{ asset('dataTables/dataTables.bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('dataTables/buttons_dataTables.min.css') }}" />
@@ -21,6 +68,8 @@
     <script src="{{ asset('dataTables/buttons.print.min.js') }}"></script>
     <script src="{{ asset('dataTables/buttons_colVis.min.js') }}"></script>
 
+    <script src="{{ asset('Components/table-basic/table-basic.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('Components/table-basic/table-basic.css') }}">
 
     <script src="{{ asset('js/students/students.js') }}"></script>
     <script>
@@ -46,7 +95,20 @@
         </div>
 
         <hr>
-        @include('home.members_table', ['data' => $students])
+
+        <x-table.table-basic
+            name="students"
+            :heading="$heading"
+            :data="$students"
+            :arrow="true"
+        />
+
+        <x-table.table-basic
+            name="members"
+            :heading="$heading"
+            :data="$members"
+            :arrow="true"
+        />
 
     </div>
 
