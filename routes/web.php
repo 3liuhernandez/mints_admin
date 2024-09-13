@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home', [PageController::class, 'home'])->name('home');
     Route::get('logout', [PageController::class, 'logout'])->name('logout');
 
-    Route::get('memberships', [PageController::class, 'memberships'])->name('memberships.home');
-    Route::post('memberships/store', [MemberController::class, 'store'])->name('memberships.store');
+    Route::get('students', [PageController::class, 'students'])->name('students.home');
+    Route::post('students/store', [StudentController::class, 'store'])->name('students.store');
 });

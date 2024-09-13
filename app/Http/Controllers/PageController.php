@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Coordination;
 use App\Models\Member;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -33,10 +34,10 @@ class PageController extends Controller
         return redirect()->route('login');
     }
 
-    public function memberships(Request $request) {
-        section("Memberships");
-        $data['coords'] = [];
-        $data['members'] = [];
-        return view("memberships/index")->with($data);
+    public function students(Request $request) {
+        section("Students");
+        $data['courses'] = [];
+        $data['students'] = Student::where('status', 1)->get();
+        return view("students/index")->with($data);
     }
 }
