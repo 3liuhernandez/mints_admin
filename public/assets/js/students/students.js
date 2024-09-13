@@ -127,11 +127,11 @@ class Students {
         });
     }
 
-    handle_change_phone_field() {
-        this.form.find('#fns_phone').on('keyup', () => {
-            const $phone = this.form.find('#fns_phone');
-            const value = $phone.val();
-            if ( value.length == 1 && value == "0" ) $phone.val('');
+    handle_change_fields_form() {
+        this.form.find('input[type="number"]').on('keyup', (event) => {
+            const field = $(event.target);
+            const value = field.val();
+            if ( value.length == 1 && value == "0" ) field.val('');
         });
     }
 
@@ -139,6 +139,6 @@ class Students {
     init() {
         this.handle_click_modal_new_student_submit();
         this.handle_click_btn_new_student();
-        this.handle_change_phone_field();
+        this.handle_change_fields_form();
     }
 }
