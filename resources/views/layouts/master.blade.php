@@ -10,7 +10,7 @@
 
     {{-- BS --}}
     <link rel="stylesheet" href="{{ asset("bs/css/bootstrap.min.css") }}">
-    <link rel="stylesheet" href="{{asset('bs/css/bootstrap-utilities.min.css')}}" />
+    {{-- <link rel="stylesheet" href="{{asset('bs/css/bootstrap-utilities.min.css')}}" /> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <script src="{{ asset("js/jquery-3.6.0.min.js")}}"></script>
 
