@@ -143,8 +143,8 @@ const show_error_form = ( list_errors ) => {
     for (const error_key in list_errors) {
         if (Object.hasOwnProperty.call(list_errors, error_key)) {
             const error_msg = list_errors[error_key];
-            const $error_input = $(`input#${error_key}`);
-            if ( $error_input.length ) $error_input.addClass('is-invalid').parent().append( template_tag_error_form(error_msg) );
+            const $error_field = $(`input#${error_key}, select#${error_key}`);
+            if ( $error_field.length ) $error_field.addClass('is-invalid').parent().append( template_tag_error_form(error_msg) );
         }
     }
 };
