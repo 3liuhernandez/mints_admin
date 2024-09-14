@@ -30,6 +30,19 @@ if (!function_exists('section')) {
 }
 
 
+if (!function_exists('section_active')) {
+    /**
+     * set or get section page
+     * @param string $section name of section page
+     * @return string current section saved in session data
+     */
+    function section_active( string $section) : string
+    {
+        return session('section') == $section ? 'active' : "";
+    }
+}
+
+
 if (!function_exists('load_component')) {
     function load_component( string|bool $section = false, string|bool $component = false ) {
         $section = str_replace(" ", "_", strtolower($section ? $section :session()));
