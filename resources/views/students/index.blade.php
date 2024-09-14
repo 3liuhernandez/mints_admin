@@ -99,14 +99,14 @@
         <x-table.table-basic
             name="students"
             :heading="$heading"
-            :data="$students"
+            :rows="$students"
             :arrow="true"
         />
 
         <x-table.table-basic
             name="members"
             :heading="$heading"
-            :data="$members"
+            :rows="$members"
             :arrow="true"
         />
 

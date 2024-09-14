@@ -15,8 +15,8 @@ class TableBasic extends Component
     public function __construct(
         public string $name,
         public object $heading,
-        public Collection $data,
-        public bool $with_footer = false,
+        public Collection $rows,
+        public bool $withFooter = false,
     ) {
         $this->prepare_data();
     }
@@ -26,12 +26,7 @@ class TableBasic extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.table.table-basic', [
-            'name' => $this->name,
-            'heading' => $this->heading,
-            'data' => $this->data,
-            'with_footer' => $this->with_footer,
-        ]);
+        return view('components.table.table-basic');
     }
 
     private function prepare_data()
@@ -43,7 +38,7 @@ class TableBasic extends Component
         });
 
         // Usar la colección $heading en lugar de $head_text
-        $this->data = $this->data->map(function ($row) use ($heading) {
+        $this->rows = $this->rows->map(function ($row) use ($heading) {
             return $row->only($heading->toArray());
         });
     }

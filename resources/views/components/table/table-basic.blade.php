@@ -12,7 +12,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $row)
+                    @foreach ($rows as $row)
                         <tr>
                             @foreach($row as $key => $item)
                                 <td class="col-{{$key}}">{{$item}}</td>
