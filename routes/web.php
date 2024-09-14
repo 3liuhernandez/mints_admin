@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PageController;
@@ -33,6 +34,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home', [PageController::class, 'home'])->name('home');
     Route::get('logout', [PageController::class, 'logout'])->name('logout');
 
-    Route::get('students', [PageController::class, 'students'])->name('students.home');
-    Route::post('students/store', [StudentController::class, 'store'])->name('students.store');
+    Route::group(['prefix' => 'students'], function () {
+        Route::get('/', [PageController::class, 'students'])->name('students.home');
+        Route::post('store', [StudentController::class, 'store'])->name('students.store');
+    });
+
+    Route::group(['prefix' => 'courses'], function () {
+        Route::get('/', [PageController::class, 'courses'])->name('courses.home');
+        Route::get('view/{id}', [CourseController::class, 'show'])->name('courses.show');
+        Route::post('store', [CourseController::class, 'store'])->name('courses.store');
+    });
+
 });
