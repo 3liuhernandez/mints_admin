@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Course;
+use App\Models\CourseStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -28,7 +28,7 @@ class CourseStatusSeeder extends Seeder
         $code = 1;
         foreach ($arr_status as $key => $value) {
             $value = (object) $value;
-            $status = new Course();
+            $status = new CourseStatus();
             $status->code = $code;
             $status->title = $value->title;
             $status->save();
